@@ -20,4 +20,4 @@ Flower is a monitoring application for Celery. In your web browser navigate to h
 
 The RabbitMQ management plugin can be found at http://localhost:15672.
 
-The username is "python_user"
+The username is "python_user" and password is "secret"
