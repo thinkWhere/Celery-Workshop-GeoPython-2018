@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3.7-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=celery_user
+      - RABBITMQ_DEFAULT_PASS=secret
+      - RABBITMQ_DEFAULT_VHOST=celery_app
+    ports:
+      - "15672:15672"
+
+  celery:
+    build:
+      context: ./celery
+    links:
+      - rabbitmq
+    depends_on:
+      - rabbitmq
+
+  flower:
+    image: crgwbr/docker-celery-flower
+    environment:
+      - CELERY_BROKER_URL=amqp://celery_user:secret@rabbitmq:5672/celery_app
+    links:
+      - celery
+      - rabbitmq
+    depends_on:
+      - celery
+    ports:
+      - "5555:5555"
