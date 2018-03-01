@@ -8,7 +8,7 @@ docker-compose up -d
 
 Attach to the celery container
 ```bash
-docker exec -it docker_celery_1 /bin/sh
+docker exec -it geopythonceleryworkshop_celery_1 /bin/sh
 ```
 
 Run a Python script to add tasks to the queue
@@ -19,3 +19,5 @@ python call_task.py
 Flower is a monitoring application for Celery. In your web browser navigate to http://localhost:5555.
 
 The RabbitMQ management plugin can be found at http://localhost:15672.
+
+The username is "python_user"

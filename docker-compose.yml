@@ -13,7 +13,7 @@ services:
 
   celery:
     build:
-      context: ./celery
+      context: celery-app
     links:
       - rabbitmq
     depends_on:
