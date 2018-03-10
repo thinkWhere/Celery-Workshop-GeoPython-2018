@@ -4,6 +4,6 @@ ADD . /celery_app
 
 RUN pip install -r /celery_app/requirements.txt
 
-WORKDIR /celery_app/app
+WORKDIR /celery_app
 
-CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
+CMD ["celery", "-A", "app.tasks", "worker", "--loglevel=info"]
