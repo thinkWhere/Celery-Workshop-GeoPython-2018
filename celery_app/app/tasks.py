@@ -1,7 +1,15 @@
-from app.app import application
-from app.exceptions import TaskError, ServiceError
-from app.service import add
+from app.service import add, ServiceError
+from app.app_factory import create_app
+
 from celery import Task
+
+
+application = create_app()
+
+
+class TaskError(Exception):
+    """Custom exception for handling task errors"""
+    pass
 
 
 class AppBaseTask(Task):
