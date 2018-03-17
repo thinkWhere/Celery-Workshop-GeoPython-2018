@@ -14,15 +14,16 @@ services:
   celery:
     build:
       context: celery_app
+      dockerfile: Dockerfile.celery
     links:
       - rabbitmq
     depends_on:
       - rabbitmq
 
   flower:
-    image: crgwbr/docker-celery-flower
-    environment:
-      - CELERY_BROKER_URL=amqp://celery_user:secret@rabbitmq:5672/celery_app
+    build:
+      context: celery_app
+      dockerfile: Dockerfile.flower
     links:
       - celery
       - rabbitmq
