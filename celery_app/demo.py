@@ -4,7 +4,8 @@ from app.tasks import add_task
 iterations = 30
 
 
-def call_tasks():
+def call_add_number_task():
+    """Call the add task x times."""
     global iterations
 
     for task_execution in range(iterations):
@@ -17,4 +18,5 @@ def call_tasks():
 
 
 if __name__ == '__main__':
-    call_tasks()
+
+    call_add_number_task()

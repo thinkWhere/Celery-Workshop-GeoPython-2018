@@ -17,6 +17,7 @@ class AppBaseTask(Task):
 
     The base Task class can be used to define
     shared behaviour between tasks.
+
     """
 
     abstract = True
@@ -38,6 +39,7 @@ def add_task(self, x, y):
     When tasks fail completely they are handled by the Task classes on_failure method
 
     Args:
+        self: instance of the Task
         x: integer
         y: integer
 
@@ -45,6 +47,7 @@ def add_task(self, x, y):
         TaskError: failed tasked are handled by the parent task class.
     Returns:
         result of addition
+
     """
     try:
         result = add(x, y)
