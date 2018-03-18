@@ -5,8 +5,6 @@
 
 [Docker Community Edition including Docker Compose](https://www.docker.com/community-edition)
 
-This application uses Compose file version 3.
-
 ### Running the Celery app
 
 Build and run the containers (RabbitMQ, Celery, Flower)
@@ -17,7 +15,7 @@ docker-compose up -d
 Run a Python script (executed within the Celery container) to add tasks to the queue
 ```bash
 docker exec -i geopythonceleryworkshop_celery_1 /bin/sh <<'EOF'
-python call_task.py
+python demo.py
 exit
 EOF
 ```
@@ -35,3 +33,9 @@ The "processed" tab should have a total of 20 successful tasks after running the
 The RabbitMQ management plugin can be found at http://localhost:15672.
 
 The username is "python_user" and password is "secret".
+
+### Tests
+
+```bash
+python -m pytest tests
+```
