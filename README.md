@@ -14,7 +14,7 @@ docker-compose up -d
 
 Run a Python script (executed within the Celery container) to add tasks to the queue
 ```bash
-docker exec -i geopythonceleryworkshop_celery_1 /bin/sh <<'EOF'
+docker exec -i celeryworkshopgeopython2018_celery_1 /bin/sh <<'EOF'
 python demo.py
 exit
 EOF
