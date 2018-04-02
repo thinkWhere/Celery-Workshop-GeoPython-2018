@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+
+  postgres:
+    # Postgres postgis image
+    image: mdillon/postgis:9.6-alpine
+    environment:
+      - POSTGRES_USER=geopython
+      - POSTGRES_PASSWORD=geopython
+      - POSTGRES_DB=geopython-db
+    ports:
+      - "5432:5432"
