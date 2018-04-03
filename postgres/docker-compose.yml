@@ -4,7 +4,11 @@ services:
 
   postgres:
     # Postgres postgis image
-    image: mdillon/postgis:9.6-alpine
+    #image: mdillon/postgis:9.6-alpine
+    build:
+      context: ./postgis_docker
+      dockerfile: Dockerfile
+    image: thinkwhere/postgis:geopy
     environment:
       - POSTGRES_USER=geopython
       - POSTGRES_PASSWORD=geopython
