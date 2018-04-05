@@ -1,4 +1,4 @@
-from app.service import add, ServiceError
+from app.service import gridify, ServiceError
 from app.app_factory import create_app
 
 from celery import Task
@@ -50,7 +50,7 @@ def add_task(self, x, y):
 
     """
     try:
-        result = add(x, y)
+        result = gridify(x, y)
     except ServiceError as e:
         raise TaskError(e)
     except Exception as exc:

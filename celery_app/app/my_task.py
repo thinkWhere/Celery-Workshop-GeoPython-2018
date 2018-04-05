@@ -41,9 +41,6 @@ def getOSGridReference(e, n):
 
 
 def gridify(x, y):
-
-
-
     with psycopg2.connect(dbname="geopython-db", user="geopython", host="postgis", port="5432", password="geopython") as conn:
         with conn.cursor() as cur:
             # find out if point intersects uk.  If not throw exception
