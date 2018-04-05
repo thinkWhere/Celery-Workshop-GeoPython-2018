@@ -51,7 +51,6 @@ def add_task(self, x, y):
     """
     try:
         result = add(x, y)
-        return result
     except ServiceError as e:
         raise TaskError(e)
     except Exception as exc:

@@ -1,6 +1,5 @@
 from time import sleep
 
-
 class ServiceError(Exception):
     """Custom exception for service errors"""
     pass
