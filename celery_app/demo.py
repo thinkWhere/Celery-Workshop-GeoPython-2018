@@ -1,7 +1,7 @@
 from app.tasks import add_task
 import random
 
-iterations = 1000
+iterations = 1000000
 
 def call_add_number_task():
     """Call the add task x times."""
