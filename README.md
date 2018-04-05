@@ -39,3 +39,15 @@ The username is "python_user" and password is "secret".
 ```bash
 python -m pytest tests
 ```
+
+### Postgis database
+Port: 5432
+
+DB: geopython-db
+User: geopython
+schema: geopython
+
+tables: grid_squares - for holding results. style_cat field will hold the 3-letter codes below
+uk_boundary - UK dataset in BNG. Has several columns with names, but gu_a3 contains 3-letter code for each region: ENG, SCT, NIR, IMN, WLS
+
+Have included the docker scripts in the pull request for reference, but they shouldn't be needed for the workshop. Docker image download size ~ 174MB
