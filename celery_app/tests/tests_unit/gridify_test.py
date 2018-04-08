@@ -1,7 +1,7 @@
 import random
 from service import gridify, ServiceError
 
-
+# TODO: use pytest here - hack day?
 if __name__ == '__main__':
 
     iterations = 1000

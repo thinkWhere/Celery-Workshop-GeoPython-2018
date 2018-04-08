@@ -5,7 +5,7 @@ iterations = 1000
 
 
 def call_gridify_task():
-    """Call the add task x times."""
+    """Call the gridify task x times."""
     global iterations
     x_max = 700000
     y_max = 1300000
@@ -17,7 +17,7 @@ def call_gridify_task():
 
         gridify_task.delay(x, y)
 
-        print(f"called add({x}, {y})")
+        print(f"called gridify({x}, {y}) asynchronously")
 
 
 if __name__ == '__main__':
