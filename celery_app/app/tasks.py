@@ -1,8 +1,7 @@
-from app.service import add, ServiceError
-from app.app_factory import create_app
-
 from celery import Task
 
+from app.app_factory import create_app
+from app.service import gridify, ServiceError
 
 application = create_app()
 
@@ -32,7 +31,8 @@ class AppBaseTask(Task):
 
 
 @application.task(base=AppBaseTask, bind=True, max_retries=3, soft_time_limit=5)
-def add_task(self, x, y):
+def gridify_task(self, x, y):
+    # TODO: Update docstring
     """Simple task to adds two integers.
 
     Failed tasks are retried x times by the Task classes on_retry method.
@@ -50,8 +50,7 @@ def add_task(self, x, y):
 
     """
     try:
-        result = add(x, y)
-        return result
+        gridify(x, y)
     except ServiceError as e:
         raise TaskError(e)
     except Exception as exc:
