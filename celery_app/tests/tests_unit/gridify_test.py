@@ -1,9 +1,6 @@
 import random
 from service import gridify, ServiceError
 
-class ServiceError(Exception):
-    """Custom exception for service errors"""
-    pass
 
 if __name__ == '__main__':
 
@@ -22,8 +19,3 @@ if __name__ == '__main__':
             pass
         except Exception as e:
             print(e)
-
-
-
-
-

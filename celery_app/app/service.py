@@ -1,30 +1,12 @@
-from time import sleep
+import math
+
 import psycopg2
+
 
 class ServiceError(Exception):
     """Custom exception for service errors"""
     pass
 
-
-def add(x, y):
-    """This function is called from the task.
-
-    Notes:
-        - Don't pass Database/ORM objects to tasks.
-
-    Args:
-        x: integer
-        y: integer
-
-    Returns: result of task
-
-    """
-    # TODO: Replace with geo related task
-    try:
-        sleep(3)
-        result = x + y
-    except ServiceError:
-        raise
 
 def gridify(x, y):
     """
@@ -32,7 +14,8 @@ def gridify(x, y):
     :param y:
     :return:
     """
-    #TODO: connection pooling?
+    # TODO: update docstring
+    # TODO: connection pooling?
     with psycopg2.connect(dbname="geopython-db", user="geopython", host="postgis", port="5432", password="geopython") as conn:
         with conn.cursor() as cur:
             # find out if point intersects uk.  If not throw exception
@@ -67,8 +50,9 @@ def gridify(x, y):
 # Derived from
 # http://www.movable-type.co.uk/scripts/latlong-gridref.html
 
+
 def get_os_grid_reference(e, n):
-    import math
+
 
     # Note no I
     gridChars = "ABCDEFGHJKLMNOPQRSTUVWXYZ"
