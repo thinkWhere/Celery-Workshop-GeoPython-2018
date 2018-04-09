@@ -1,7 +1,7 @@
 from celery import Task
 
 from app.app_factory import create_app
-from app.service import gridify, ServiceError
+from app.service import do_task, ServiceError
 
 application = create_app()
 
@@ -31,7 +31,7 @@ class AppBaseTask(Task):
 
 
 @application.task(base=AppBaseTask, bind=True, max_retries=3, soft_time_limit=5)
-def gridify_task(self, x, y):
+def do_task_task(self, x, y):
     # TODO: Update docstring
     """Simple task to adds two integers.
 
@@ -50,7 +50,7 @@ def gridify_task(self, x, y):
 
     """
     try:
-        gridify(x, y)
+        do_task(x, y)
     except ServiceError as e:
         raise TaskError(e)
     except Exception as exc:

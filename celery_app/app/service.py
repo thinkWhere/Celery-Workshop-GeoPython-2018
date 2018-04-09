@@ -8,7 +8,7 @@ class ServiceError(Exception):
     pass
 
 
-def gridify(x, y):
+def do_task(x, y):
     """
     :param x:
     :param y:
