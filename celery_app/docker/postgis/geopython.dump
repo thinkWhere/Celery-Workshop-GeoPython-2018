@@ -41,7 +41,8 @@ CREATE TABLE geopython.grid_squares (
     grid_ref text NOT NULL,
     geom public.geometry(Polygon,27700),
     style_cat character varying(3) NOT NULL,
-    CONSTRAINT grid_squares_style_cat_check CHECK (((style_cat)::text = ANY ((ARRAY['NIR'::character varying, 'IMN'::character varying, 'ENG'::character varying, 'SCT'::character varying, 'WLS'::character varying])::text[])))
+	CONSTRAINT grid_squares_grid_ref_uni UNIQUE (grid_ref),
+    CONSTRAINT grid_squares_style_cat_check CHECK (((style_cat)::text = ANY ((ARRAY['NIR'::character varying, 'IMN'::character varying, 'ENG'::character varying, 'SCT'::character varying, 'WLS'::character varying, 'SEA'::character varying])::text[])))
 );
 
 
