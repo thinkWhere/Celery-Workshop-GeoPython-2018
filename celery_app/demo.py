@@ -1,7 +1,7 @@
 from app.tasks import gridify_task
 import random
 
-iterations = 1000
+iterations = 100000
 
 
 def call_gridify_task():

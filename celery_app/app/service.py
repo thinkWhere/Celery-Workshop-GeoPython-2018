@@ -27,9 +27,10 @@ def gridify(x, y):
 
             rows = cur.fetchall()
 
-            if not rows:
-                # TODO throw exception
-                raise ServiceError("point does not intersect with uk")
+            if rows:
+                style = rows[0][0]
+            else:
+                style = 'SEA'
 
             # get os grid ref
             bng_grid_ref = get_os_grid_reference(x, y)
@@ -45,7 +46,7 @@ def gridify(x, y):
 
             # insert to db.  Insert exceptions will raise to task
             # TODO make grid ref unique in db
-            cur.execute(f"INSERT INTO grid_squares (grid_ref, style_cat, geom) VALUES('{bng_grid_ref}', '{rows[0][0]}', {string_for_polygon})")
+            cur.execute(f"INSERT INTO grid_squares (grid_ref, style_cat, geom) VALUES('{bng_grid_ref}', '{style}', {string_for_polygon})")
 
 # Derived from
 # http://www.movable-type.co.uk/scripts/latlong-gridref.html
