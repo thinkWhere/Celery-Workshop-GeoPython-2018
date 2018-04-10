@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 
 services:
 
@@ -21,6 +21,7 @@ services:
     ports:
       # The rabbitMQ management plugin - running on http://localhost:15672
       - "15672:15672"
+      - "5672:5672"
 
   celery:
     # Python application which run the Celery worker
