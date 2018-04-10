@@ -1,5 +1,5 @@
 import random
-from service import gridify, ServiceError
+from service import do_task, ServiceError
 
 # TODO: use pytest here - hack day?
 if __name__ == '__main__':
@@ -14,7 +14,7 @@ if __name__ == '__main__':
         y = random.randint(0, y_max)
 
         try:
-            gridify(x, y)
+            do_task(x, y)
         except ServiceError as se:
             pass
         except Exception as e:

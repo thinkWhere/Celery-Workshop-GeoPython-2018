@@ -14,7 +14,7 @@ docker-compose up -d
 
 Run a Python script (executed within the Celery container) to add tasks to the queue
 ```bash
-docker exec -ti geopythonceleryworkshop_celery_1 sh -c "python demo.py"
+docker exec -ti celeryworkshopgeopython2018_celery_1 sh -c "python demo.py"
 ```
 
 ### Monitoring
@@ -29,7 +29,7 @@ The "processed" tab should have a total of 20 successful tasks after running the
 
 The RabbitMQ management plugin can be found at http://localhost:15672.
 
-The username is "python_user" and password is "secret".
+The username is "celery_user" and password is "secret".
 
 ### Tests
 
