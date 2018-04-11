@@ -1,5 +1,34 @@
-## GeoPython Workshop 2018
+# GeoPython Workshop 2018
 ## Task queues with Celery and RabbitMQ
+
+introduction
+
+## Before you start...
+
+### Controlling the application
+docker commands
+
+### changing the code
+
+### troubleshooting
+
+## Workshop begins...
+
+### Executing tasks asynchronously
+run demo.py
+
+### Monitoring tasks
+
+In your browser navigate to http://localhost:5555/
+
+Inspect failed tests exceptions
+
+
+### Challenge 1
+### Challenge 2
+### Challenge 3
+
+###########################################
 
 ### Requirements
 
@@ -21,7 +50,7 @@ docker exec -ti celeryworkshopgeopython2018_celery_1 sh -c "python demo.py"
 
 #### Flower
 
-Flower is a monitoring application for Celery and is included in the Compose configuration. In your web browser navigate to http://localhost:5555. 
+Flower is a monitoring application for Celery and is included in the Compose configuration. In your web browser navigate to http://localhost:5555.
 
 The "processed" tab should have a total of 20 successful tasks after running the Python script once.
 
