@@ -1,7 +1,7 @@
 from celery import Task
 
 from app.app_factory import create_app
-from app.service import do_task, ServiceError
+from app.service import geoprocess, ServiceError
 
 application = create_app()
 
@@ -31,9 +31,9 @@ class AppBaseTask(Task):
 
 
 @application.task(base=AppBaseTask, bind=True, max_retries=3, soft_time_limit=5)
-def do_task_task(self, x, y):
+def do_task(self, x, y):
     # TODO: Update docstring
-    """Simple task to adds two integers.
+    """Performs simple geoprocessing task.
 
     Failed tasks are retried x times by the Task classes on_retry method.
     When tasks fail completely they are handled by the Task classes on_failure method
@@ -50,8 +50,6 @@ def do_task_task(self, x, y):
 
     """
     try:
-        do_task(x, y)
-    except ServiceError as e:
-        raise TaskError(e)
+        geoprocess(x, y)
     except Exception as exc:
         self.retry(countdown=10, exc=exc)

@@ -7,7 +7,7 @@ class ServiceError(Exception):
     pass
 
 
-def do_task(x, y):
+def geoprocess(x, y):
     """
     Implementation code for celery task
     :param x: x value for task

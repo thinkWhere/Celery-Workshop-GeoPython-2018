@@ -1,25 +1,29 @@
-from app.tasks import do_task_task
+from app.tasks import do_task
 import random
 
-iterations = 100000
 
-
-def call_do_task_task():
+def call_do_task():
     """Call the do_task task x times."""
-    global iterations
-    x_max = 700000
-    y_max = 1300000
+    iterations = 1000000
 
     for task_execution in range(iterations):
 
-        x = random.randint(0, x_max)
-        y = random.randint(0, y_max)
+        x = get_random_x()
+        y = get_random_y()
 
-        do_task_task.delay(x, y)
+        do_task.delay(x, y)
 
         print(f"called do_task({x}, {y}) asynchronously")
 
 
+def get_random_x():
+    return random.randint(0, 700000)
+
+
+def get_random_y():
+    return random.randint(0, 130000)
+
+
 if __name__ == '__main__':
 
-    call_do_task_task()
+    call_do_task()

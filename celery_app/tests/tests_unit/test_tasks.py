@@ -3,13 +3,13 @@ from unittest.mock import patch
 
 from celery.exceptions import Retry
 
-from app.tasks import do_task_task
+from app.tasks import do_task
 
 
 @patch('app.tasks.add')
-def test_do_task_task_success(mock_add):
+def test_do_task_success(mock_add):
     # Act
-    do_task_task(2, 3)
+    do_task(2, 3)
 
     # Assert
     mock_add.assert_called_with(2, 3)
@@ -17,7 +17,7 @@ def test_do_task_task_success(mock_add):
 
 @patch('app.tasks.add')
 @patch('app.tasks.add_task.retry')
-def test_do_task_task_handles_failure(mock_add_task_retry, mock_add):
+def test_do_task_handles_failure(mock_add_task_retry, mock_add):
 
     # Arrange
     mock_add_task_retry.side_effect = Retry()
@@ -25,4 +25,4 @@ def test_do_task_task_handles_failure(mock_add_task_retry, mock_add):
 
     # Act/assert
     with raises(Retry):
-        do_task_task(2, 1)
+        do_task(2, 1)
