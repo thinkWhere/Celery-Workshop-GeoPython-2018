@@ -9,7 +9,7 @@ This application requires [Docker Community Edition and Docker Compose](https://
 
 This application is a docker-compose orchestration of four Docker containers:
 
-- Celery - Python Celery application to produce/consume messages
+- Celery - Python Celery application to produce/consume messages (the worker)
 - Flower - Web app to monitor tasks
 - RabbitMQ - Message broker (the queue)
 - PostGIS - Spatial database to store task output
@@ -42,6 +42,12 @@ This application is a docker-compose orchestration of four Docker containers:
 
 Each time you make a change to any Python files run the command in step 2 - `docker-compose up --build`. This will rebuild the images incorporating any changes.
 
+### Monitoring tasks with Flower
+
+Flower is a web application for monitoring Celery tasks. In your web browser navigate to http://localhost:5555.
+
+Flower enables monitoring of task being excecuting by the worker including
+
 ### Troubleshooting
 
 The logs of each container can be inspected with the command:
@@ -60,18 +66,9 @@ Be aware this will also pull external images again.
 
 ### Executing tasks asynchronously
 
-To call the task asynchronously (adding a message to the queue) run the command:
+To call the task asynchronously run the command:
 
 `docker exec -it <container id> /bin/sh -c "python demo.py"`
-
-A message is printed for each asynchronous call
-
-### Monitoring tasks
-
-Flower is a monitoring application for Celery and is included in the Compose configuration. In your web browser navigate to http://localhost:5555.
-
-The "processed" tab should have a total of 20 successful tasks after running the Python script once.
-Inspect failed tests exceptions
 
 ### Challenge 1
 ### Challenge 2
