@@ -1,5 +1,6 @@
 import math
 import psycopg2
+import random
 
 
 class ServiceError(Exception):
@@ -8,6 +9,8 @@ class ServiceError(Exception):
 
 
 def geoprocess(x, y):
+    if random.randint(0, 10) == 6:
+        raise ServiceError("6 is my unlucky number.")
     """
     Implementation code for celery task
     :param x: x value for task
