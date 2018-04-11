@@ -51,5 +51,7 @@ def do_task(self, x, y):
     """
     try:
         geoprocess(x, y)
+    except ServiceError as se:
+        self.retry(countdown=10, exc=se)
     except Exception as exc:
-        self.retry(countdown=10, exc=exc)
+        raise TaskError(exc)
