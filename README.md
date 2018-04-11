@@ -1,7 +1,7 @@
 # GeoPython Workshop 2018
 ## Task queues with Celery and RabbitMQ
 
-Celery is a popular task queue library for the Python language. This demo application uses RabbitMQ as message broker. 
+Celery is a popular task queue library for the Python language. This demo application uses RabbitMQ as message broker.
 
 ## Before you start...
 
