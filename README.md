@@ -5,15 +5,30 @@ introduction
 
 ## Before you start...
 
+This application requires [Docker Community Edition and Docker Compose](https://www.docker.com/community-edition)
+
 This application is a docker-compose orchestration of four Docker containers:
 
 - Celery - Python Celery application to produce/consume messages
 - Flower - Web app to monitor tasks
 - RabbitMQ - Message broker (the queue)
-- PostGIS - Spatial database
+- PostGIS - Spatial database to store task output
 
 ### Controlling the application
-docker commands
+
+1. Open a terminal and change directory to the location of `docker-compose.yml`.
+
+2. Build and start the containers:
+
+  `docker-compose up --build`
+
+  The console will display the stdout from each container.
+
+  This command will pull the necessary docker images from Docker hub and build the application from Dockerfiles. You can inspect the docker-compose file to see gain an understanding of the application structure.
+
+3. Check everything is running OK with the command:
+  `docker-compose ps`
+  The state of each container should be "Up"
 
 ### changing the code
 
@@ -37,9 +52,7 @@ Inspect failed tests exceptions
 
 ###########################################
 
-### Requirements
 
-[Docker Community Edition including Docker Compose](https://www.docker.com/community-edition)
 
 ### Running the Celery app
 
