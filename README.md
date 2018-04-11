@@ -5,6 +5,13 @@ introduction
 
 ## Before you start...
 
+This application is a docker-compose orchestration of four Docker containers:
+
+- Celery - Python Celery application to produce/consume messages
+- Flower - Web app to monitor tasks
+- RabbitMQ - Message broker (the queue)
+- PostGIS - Spatial database
+
 ### Controlling the application
 docker commands
 
