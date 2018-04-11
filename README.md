@@ -1,7 +1,7 @@
 # GeoPython Workshop 2018
 ## Task queues with Celery and RabbitMQ
 
-introduction
+Celery is a popular task queue library for the Python language. This demo application uses RabbitMQ as message broker. 
 
 ## Before you start...
 
@@ -10,11 +10,11 @@ This application requires [Docker Community Edition and Docker Compose](https://
 This application is a docker-compose orchestration of four Docker containers:
 
 - Celery - Python Celery application to produce/consume messages (the worker)
-- Flower - Web app to monitor tasks
 - RabbitMQ - Message broker (the queue)
+- Flower - Web app to monitor tasks
 - PostGIS - Spatial database to store task output
 
-### Build and run the containers
+#### Build and run the containers
 
 1. Open a terminal and change directory to the location of `docker-compose.yml`.
 
@@ -38,17 +38,17 @@ This application is a docker-compose orchestration of four Docker containers:
 
 5. Stop the containers by cancelling the process in terminal window.
 
-### Redeploying changes to the code
+#### Re-deploying changes to the code
 
 Each time you make a change to any Python files run the command in step 2 - `docker-compose up --build`. This will rebuild the images incorporating any changes.
 
-### Monitoring tasks with Flower
+#### Monitoring tasks with Flower
 
 Flower is a web application for monitoring Celery tasks. In your web browser navigate to http://localhost:5555.
 
-Flower enables monitoring of task being excecuting by the worker including
+Flower provides monitoring of task executed by the worker. Failed tasks exception messages are captured for inspection.
 
-### Troubleshooting
+#### Troubleshooting
 
 The logs of each container can be inspected with the command:
 
@@ -64,15 +64,15 @@ Be aware this will also pull external images again.
 
 ## Workshop begins...
 
-### Executing tasks asynchronously
+#### Executing tasks asynchronously
 
-To call the task asynchronously run the command:
+To call the task asynchronously the Python file demo.py:
 
 `docker exec -it <container id> /bin/sh -c "python demo.py"`
 
-### Challenge 1
-### Challenge 2
-### Challenge 3
+#### Challenge 1
+#### Challenge 2
+#### Challenge 3
 
 ### Tests
 
