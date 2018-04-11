@@ -5,7 +5,7 @@ introduction
 
 ## Before you start...
 
-This application requires [Docker Community Edition and Docker Compose](https://www.docker.com/community-edition)
+This application requires [Docker Community Edition and Docker Compose](https://www.docker.com/community-edition).
 
 This application is a docker-compose orchestration of four Docker containers:
 
@@ -14,71 +14,68 @@ This application is a docker-compose orchestration of four Docker containers:
 - RabbitMQ - Message broker (the queue)
 - PostGIS - Spatial database to store task output
 
-### Controlling the application
+### Build and run the containers
 
 1. Open a terminal and change directory to the location of `docker-compose.yml`.
 
-2. Build and start the containers:
+2. Build and start the containers (some images are pulled from Docker hub - be patient!):
 
   `docker-compose up --build`
 
-  The console will display the stdout from each container.
+  The console will display the stdout from each container as they build and run.
 
-  This command will pull the necessary docker images from Docker hub and build the application from Dockerfiles. You can inspect the docker-compose file to see gain an understanding of the application structure.
+  You can inspect the docker-compose file to gain a further understanding of the application structure.
 
 3. Check everything is running OK with the command:
+
   `docker-compose ps`
-  The state of each container should be "Up"
 
-### changing the code
+  The state of each container should be "Up".
 
-### troubleshooting
+4. You may wish to execute commands inside a container:
+
+  `docker exec -it <container id> /bin/sh -c "<command for container>"`
+
+5. Stop the containers by cancelling the process in terminal window.
+
+### Redeploying changes to the code
+
+Each time you make a change to any Python files run the command in step 2 - `docker-compose up --build`. This will rebuild the images incorporating any changes.
+
+### Troubleshooting
+
+The logs of each container can be inspected with the command:
+
+`docker logs <container id>`
+
+The container ID's can be identified with the docker ps command.
+
+If you think a container is broken beyond repair run:
+
+`docker-compose up --force-recreate`
+
+Be aware this will also pull external images again.
 
 ## Workshop begins...
 
 ### Executing tasks asynchronously
-run demo.py
+
+To call the task asynchronously (adding a message to the queue) run the command:
+
+`docker exec -it <container id> /bin/sh -c "python demo.py"`
+
+A message is printed for each asynchronous call
 
 ### Monitoring tasks
-
-In your browser navigate to http://localhost:5555/
-
-Inspect failed tests exceptions
-
-
-### Challenge 1
-### Challenge 2
-### Challenge 3
-
-###########################################
-
-
-
-### Running the Celery app
-
-Build and run the containers (RabbitMQ, Celery, Flower)
-```bash
-docker-compose up -d
-```
-
-Run a Python script (executed within the Celery container) to add tasks to the queue
-```bash
-docker exec -ti celeryworkshopgeopython2018_celery_1 sh -c "python demo.py"
-```
-
-### Monitoring
-
-#### Flower
 
 Flower is a monitoring application for Celery and is included in the Compose configuration. In your web browser navigate to http://localhost:5555.
 
 The "processed" tab should have a total of 20 successful tasks after running the Python script once.
+Inspect failed tests exceptions
 
-#### RabbitMQ Management Plugin
-
-The RabbitMQ management plugin can be found at http://localhost:15672.
-
-The username is "celery_user" and password is "secret".
+### Challenge 1
+### Challenge 2
+### Challenge 3
 
 ### Tests
 
