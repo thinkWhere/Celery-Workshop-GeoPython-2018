@@ -1,9 +1,0 @@
-- make a few random tasks fail.  Throw exception randomly in worker, or randomly put some crap data on the queue.
-
-- talk - empahsise not use specail types, use raw python types, integers etc.
-
-- put the finishined thing on  a branch.  Put the thing that gets worked on in the workshop on a separate branch.
-
-- task take an x,y buffer it, put in a database, display in an openlayers map polling every
-
-- finalay branch, get the ip addresses and commit ahead of time, get everone to switch to branch
