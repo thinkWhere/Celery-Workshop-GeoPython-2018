@@ -9,6 +9,7 @@ broker_url = 'amqp://celery_user:secret@***IP_ADDRESS_HERE***:5672/celery_app'
 # Create Celery application
 application = Celery('tasks', broker=broker_url)
 
+
 class TaskError(Exception):
     """Custom exception for handling task errors"""
     pass
@@ -47,6 +48,7 @@ def do_task(self, x, y):
 
     Raises:
         TaskError: failed tasked are handled by the parent task class.
+
     Returns:
         None
     """
