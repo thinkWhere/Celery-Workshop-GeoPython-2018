@@ -225,6 +225,24 @@ Hints:
 
 ### Challenge 3
 
+This challenge will show multiple celery workers on different machines all pulling tasks from the same queue so that tasks are processed faster.
+
+In this exercise, if the technology allows us, you will connect your celery worker to a central queue, process tasks, and write the results to a central database.
+
+1. Checkout branch `challenge-3`.
+
+2. Edit *celery_app/app/tasks.py* line #7 to replace `***IP_ADDRESS_HERE***` with the IP address given to you in the workshop.  This allows the celery worker to connect to the central queue.
+
+3. Edit *celery_app/app/service.py* line #17 to replace `***IP_ADDRESS_HERE***` with the IP address given to you in the workshop. This is for connection to write results to a central database.
+
+4. Rebuild the Docker containers
+
+5. Open up the Flower web interface.  If everything is working correctly you should be able to see all the workers that are connected to the central queue and the speeds at which they are processing tasks.
+
+The results of the processing are being shown on the screen.
+
+
+
 ### Tests
 
 ```bash
