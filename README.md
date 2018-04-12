@@ -9,9 +9,9 @@ This application requires [Docker Community Edition and Docker Compose](https://
 
 This application is a [docker-compose](https://docs.docker.com/compose/) orchestration of four Docker containers:
 
-- Celery - Python Celery application to produce/consume messages (the worker)
+- [Celery](http://docs.celeryproject.org/en/latest/index.html) - Python Celery application to produce/consume messages (the worker)
 - [RabbitMQ](https://www.rabbitmq.com/#getstarted) - Message broker (the queue)
-- [Flower]((http://flower.readthedocs.io/en/latest/)) - Web app to monitor tasks
+- [Flower]((http://flower.readthedocs.io/en/latest/) - Web app to monitor tasks
 - [PostGIS](https://postgis.net/) - Spatial database to store task output
 
 #### Build and run the containers
@@ -58,7 +58,8 @@ Flower provides monitoring of task executed by the worker. Some of Flowers featu
 - Inspect and control tasks
 - Inspect failed tasks exception messages
 - Control worker process pool size
-- Monitor [periodic tasks](http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html)
+- Monitor
+- [periodic tasks](http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html)
 
 Not all of these features are avaliable in this project.
 
@@ -80,11 +81,9 @@ docker-compose up --force-recreate
 
 **This will force a complete rebuild so be aware this will also pull external images again.**
 
-TODO: Change branch
-
 ## Workshop begins...
 
-#### Instantiate Celery object
+#### Instantiate Celery application object
 
 Before defining any tasks, a Celery application object must be instantiated.
 
@@ -97,7 +96,6 @@ broker_url = 'amqp://celery_user:secret@rabbitmq:5672/celery_app'
 
 # Create Celery application
 application = Celery('tasks', broker=broker_url)
-
 ...
 ```
 
@@ -107,7 +105,7 @@ The `Celery` object has two required paramters:
 
 #### Defining a task
 
-To define a task to run asynchronously, simply apply the `task` decorator to a function. In this application a single task `do_task` is defined in `tasks.py`.
+To define a task to run asynchronously, simply apply the `task` decorator to a function. This application has a single task `do_task` is defined in `tasks.py`.
 
 *celery_app/app/tasks.py*
 ```python
@@ -127,6 +125,7 @@ def do_task(self, x, y):
 
     Raises:
         TaskError: failed tasked are handled by the parent task class.
+
     Returns:
         None
     """
@@ -139,15 +138,84 @@ def do_task(self, x, y):
 ...
 ```
 
+The `task` decorator takes several optional keyword arguments including the maximum number of reties to attempt in the event of a failure and a timeout limit for hanging tasks.
+
 #### Calling tasks asynchronously
 
-To call the task asynchronously the Python file demo.py:
+To "queue" a task use the `delay` function and provide the arguments which the `do_task` function requires.
+
+*celery_app/demo.py*
+```python
+from app.tasks import do_task
+
+def call_do_task():
+    """Call the do_task task x times."""
+    iterations = 2500
+
+    for task_execution in range(iterations):
+
+        x = get_random_x()
+        y = get_random_y()
+
+        do_task.delay(x, y)
+
+        print(f"called do_task({x}, {y}) asynchronously")
+...
+```
+Run demo.py from within the celery container:
+
 ```docker
 docker exec -it <container id> /bin/sh -c "python demo.py"
 ```
 
+As you can see the `do_task` function has been called 2500 times with random x and y values.
+
+Check the process of the running/queued tasks in the [Flower web app](#monitoring-tasks-with-flower).
+
+#### Viewing the results
+
+If you have desktop GIS package (such as QGIS), you will be able to connect to PostGIS and add the `grid_squares` table as a vector layer.
+
+The database connection details are:
+- DB = geopython-db
+- User = geopython
+- Schema = geopython
+
+From this table and the code, try and work out what the task does.
+
 #### Challenge 1
+
+The challenge is to write code to add tasks to the queue.
+
+Hints:
+
+- checkout branch challenge-1
+- Look in celery_app.demo.py for the TODO section relating to challenge 1
+- Look in celery_app.app.tasks to identify the function names and expected parameters of the the celery task
+- In celery_app.demo.py write a loop that will iterate 2500 times.  Inside the loop, use the two helper functions get_random_x and get_random_y to get suitable x and y values, add these values to the queue.  You will need to use the special celery delay function.
+- Rebuild the docker containers after you have made your changes, then run demo.py within the docker container using docker exec
+- You should now see you tasks being added to the queue in flower, and hopefully being successfully processed.  You can optionally confirm that things are working by looking in qgis or pgadmin to see the items being added to the database table
+
+Troubleshooting:
+
+- Use docker logs docker logs celeryworkshopgeopython2018_celery_1 to view console and view python errors
+- Use Flower to view failed task details.  You may be able to debug from the python output there
+- If you are reall stuck, the solution is on the master branch
+
 #### Challenge 2
+
+The challenge is to get celery to retry processing a task in the event of a recoverable error.
+
+Hints:
+
+- checkout branch challenge-1
+- rebuild the docker containers, then run demo.py.  Observe that some tasks fail and none are retried
+- Check the celery docs for retrying.  http://docs.celeryproject.org/en/latest/userguide/tasks.html#retrying
+- Look in celery_app.app.service to see where a random artificial error is thrown.  Note the error type.
+- In the place where the celery task is executed (look for TODO - challenge 2), handle the above error using python exception handling, and trigger the celery retry mechanism.  See if you can also add a retry delay.
+- Rebuild the docker containers after you have made your changes, then run demo.py within the docker container using docker exec
+- If you have been successfull, you should see the retry counter in flower incrementing, and most likely no fails.  All tasks should pass after being retried.
+
 #### Challenge 3
 
 ### Tests
