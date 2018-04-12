@@ -26,7 +26,7 @@ This application is a docker-compose orchestration of four Docker containers:
 
   You can inspect the docker-compose file to gain a further understanding of the application structure.
 
-3. Check everything is running OK with the command:
+3. Check everything is running OK, in a new terminal window (as it is starting up interactively in the first console):
 
   `docker-compose ps`
 
