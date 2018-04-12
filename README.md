@@ -184,7 +184,7 @@ The database connection details are:
 
 From this table and the code, try and work out what the task does.
 
-#### Challenge 1
+### Challenge 1
 
 The challenge is to write code to add tasks to the queue.
 
@@ -205,7 +205,7 @@ git checkout challenge-1
 
 6. You should now see your tasks being added to the queue in Flower, and hopefully being successfully processed.  You can optionally confirm that things are working by looking in QGIS or PgAdmin to see the items being added to the database table.
 
-#### Challenge 2
+### Challenge 2
 
 The challenge is to get celery to retry processing a task in the event of a recoverable error.
 
@@ -223,7 +223,7 @@ Hints:
 
 6. Rebuild the docker containers after you have made your changes, then run `demo.py` - If you have been successful, you should see the retry counter in flower incrementing, and most likely no fails.  All tasks should pass after being retried.
 
-#### Challenge 3
+### Challenge 3
 
 ### Tests
 
