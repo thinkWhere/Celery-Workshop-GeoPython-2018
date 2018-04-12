@@ -138,7 +138,7 @@ def do_task(self, x, y):
 ...
 ```
 
-The `task` decorator takes several optional keyword arguments including the maximum number of reties to attempt in the event of a failure and a timeout limit for hanging tasks.
+The `task` decorator takes several optional keyword arguments including the maximum number of retries to attempt in the event of a failure and a timeout limit for hanging tasks.
 
 #### Calling tasks asynchronously
 
@@ -178,6 +178,7 @@ If you have desktop GIS package (such as QGIS), you will be able to connect to P
 
 The database connection details are:
 - DB = geopython-db
+- Port = 5432
 - User = geopython
 - Schema = geopython
 
