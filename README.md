@@ -58,7 +58,7 @@ Flower provides monitoring of task executed by the worker. Some of Flowers featu
 - Inspect and control tasks
 - Inspect failed tasks exception messages
 - Control worker process pool size
-- Monitor [perodic tasks](http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html)
+- Monitor [periodic tasks](http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html)
 
 Not all of these features are avaliable in this project.
 
@@ -78,7 +78,9 @@ If you think you container is broken beyond repair run:
 docker-compose up --force-recreate
 ```
 
-This will force a complete rebuild so be aware this will also pull external images again.
+**This will force a complete rebuild so be aware this will also pull external images again.**
+
+TODO: Change branch
 
 ## Workshop begins...
 

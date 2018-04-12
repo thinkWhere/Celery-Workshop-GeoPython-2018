@@ -23,13 +23,10 @@ The challenge is to get celery to retry processing a task in the event of a reco
 
 Hints:
 
-- checkout branch challenge-1
+- checkout branch challenge-2
 - rebuild the docker containers, then run demo.py.  Observe that some tasks fail and none are retried
 - Check the celery docs for retrying.  http://docs.celeryproject.org/en/latest/userguide/tasks.html#retrying
 - Look in celery_app.app.service to see where a random artificial error is thrown.  Note the error type.
 - In the place where the celery task is executed (look for TODO - challenge 2), handle the above error using python exception handling, and trigger the celery retry mechanism.  See if you can also add a retry delay.
 - Rebuild the docker containers after you have made your changes, then run demo.py within the docker container using docker exec
 - If you have been successfull, you should see the retry counter in flower incrementing, and most likely no fails.  All tasks should pass after being retried.
-
-
-
