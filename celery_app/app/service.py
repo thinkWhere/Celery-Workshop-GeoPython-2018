@@ -13,8 +13,8 @@ def geoprocess(x, y):
     :param x: x value for task
     :param y: y value for task
     """
-    # TODO: connection pooling?
-    with psycopg2.connect(dbname="geopython-db", user="geopython", host="postgis", port="5432", password="geopython") as con:
+    # TODO: Change IP address to shared database
+    with psycopg2.connect(dbname="geopython-db", user="geopython", host="***IP_ADDRESS_HERE***", port="5432", password="geopython") as con:
         with con.cursor() as cur:
 
             # check for intersection

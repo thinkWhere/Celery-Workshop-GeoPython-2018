@@ -3,7 +3,8 @@ from celery import Celery, Task
 from app.service import geoprocess, ServiceError
 
 # URL to connect to broker
-broker_url = 'amqp://celery_user:secret@rabbitmq:5672/celery_app'
+# TODO: insert IP Address here
+broker_url = 'amqp://celery_user:secret@***IP_ADDRESS_HERE***:5672/celery_app'
 
 # Create Celery application
 application = Celery('tasks', broker=broker_url)

@@ -2,15 +2,6 @@ version: "2"
 
 services:
 
-  postgis:
-    image: thinkwhere/postgis:geopy
-    environment:
-      - POSTGRES_USER=geopython
-      - POSTGRES_PASSWORD=geopython
-      - POSTGRES_DB=geopython-db
-    ports:
-      - "5432:5432"
-
   rabbitmq:
     # Message broker for Celery
     image: rabbitmq:3.7-management-alpine
@@ -28,20 +19,14 @@ services:
     build:
       context: celery_app
       dockerfile: docker/celery.dockerfile
-    links:
-      - rabbitmq
     depends_on:
       - rabbitmq
-      - postgis
 
   flower:
     # Monitoring application - running on http://localhost:5555
     build:
       context: celery_app
       dockerfile: docker/flower.dockerfile
-    links:
-      - celery
-      - rabbitmq
     depends_on:
       - celery
     ports:
