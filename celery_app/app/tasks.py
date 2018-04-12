@@ -46,6 +46,7 @@ def do_task(self, x, y):
 
     Raises:
         TaskError: failed tasked are handled by the parent task class.
+
     Returns:
         None
     """
