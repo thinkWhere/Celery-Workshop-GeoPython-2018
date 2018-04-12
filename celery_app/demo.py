@@ -4,7 +4,7 @@ import random
 
 def call_do_task():
     """Call the do_task task x times."""
-    iterations = 1000000
+    iterations = 2500
 
     for task_execution in range(iterations):
 
