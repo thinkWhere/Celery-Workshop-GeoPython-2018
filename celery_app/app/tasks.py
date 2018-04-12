@@ -8,6 +8,7 @@ broker_url = 'amqp://celery_user:secret@rabbitmq:5672/celery_app'
 # Create Celery application
 application = Celery('tasks', broker=broker_url)
 
+
 class TaskError(Exception):
     """Custom exception for handling task errors"""
     pass
