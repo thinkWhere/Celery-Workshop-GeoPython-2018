@@ -1,10 +1,12 @@
-from celery import Task
+from celery import Celery, Task
 
-from app.app_factory import create_app
 from app.service import geoprocess, ServiceError
 
-application = create_app()
+# URL to connect to broker
+broker_url = 'amqp://celery_user:secret@rabbitmq:5672/celery_app'
 
+# Create Celery application
+application = Celery('tasks', broker=broker_url)
 
 class TaskError(Exception):
     """Custom exception for handling task errors"""
@@ -32,7 +34,6 @@ class AppBaseTask(Task):
 
 @application.task(base=AppBaseTask, bind=True, max_retries=3, soft_time_limit=5)
 def do_task(self, x, y):
-    # TODO: Update docstring
     """Performs simple geoprocessing task.
 
     Failed tasks are retried x times by the Task classes on_retry method.
@@ -45,9 +46,9 @@ def do_task(self, x, y):
 
     Raises:
         TaskError: failed tasked are handled by the parent task class.
-    Returns:
-        result of addition
 
+    Returns:
+        None
     """
     try:
         geoprocess(x, y)
