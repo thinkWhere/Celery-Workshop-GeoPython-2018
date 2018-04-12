@@ -1,11 +1,7 @@
 # GeoPython Workshop 2018
 ## Task queues with Celery and RabbitMQ
 
-Celery is a popular task queue library for the Python language. This demo application asynchronously executes a simple geoprocessing task which creates a geometry and writes it to a PostGIS database. RabbitMQ is configured as the message broker. No results backend is used for this application.
-
-## Before you start...
-
-This application requires [Docker Community Edition and Docker Compose](https://www.docker.com/community-edition).
+Celery is a popular task queue library for the Python programming language. This demo application asynchronously executes a simple geoprocessing task which creates a geometry and writes it to a PostGIS database.
 
 This application is a [docker-compose](https://docs.docker.com/compose/) orchestration of four Docker containers:
 
@@ -13,6 +9,10 @@ This application is a [docker-compose](https://docs.docker.com/compose/) orchest
 - [RabbitMQ](https://www.rabbitmq.com/#getstarted) - Message broker (the queue)
 - [Flower]((http://flower.readthedocs.io/en/latest/) - Web app to monitor tasks
 - [PostGIS](https://postgis.net/) - Spatial database to store task output
+
+## Before you start...
+
+This application requires [Docker Community Edition and Docker Compose](https://www.docker.com/community-edition).
 
 #### Build and run the containers
 
@@ -61,7 +61,7 @@ Flower provides monitoring of task executed by the worker. Some of Flowers featu
 - Monitor
 - [periodic tasks](http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html)
 
-Not all of these features are avaliable in this project.
+Not all of these features are available in this project.
 
 #### Troubleshooting
 
@@ -99,13 +99,13 @@ application = Celery('tasks', broker=broker_url)
 ...
 ```
 
-The `Celery` object has two required paramters:
+The `Celery` object has two required parameters:
 - Name of the current module - 'tasks'
 - URL of the message broker as a keyword argument
 
 #### Defining a task
 
-To define a task to run asynchronously, simply apply the `task` decorator to a function. This application has a single task `do_task` is defined in `tasks.py`.
+To define a task to run asynchronously, simply apply the `task` decorator to a function. This application has a single task `do_task` defined in `tasks.py`.
 
 *celery_app/app/tasks.py*
 ```python
@@ -162,7 +162,7 @@ def call_do_task():
         print(f"called do_task({x}, {y}) asynchronously")
 ...
 ```
-Run demo.py from within the celery container:
+Run `demo.py` from within the celery container:
 
 ```docker
 docker exec -it <container id> /bin/sh -c "python demo.py"
@@ -189,18 +189,20 @@ The challenge is to write code to add tasks to the queue.
 
 Hints:
 
-- checkout branch challenge-1
-- Look in celery_app.demo.py for the TODO section relating to challenge 1
-- Look in celery_app.app.tasks to identify the function names and expected parameters of the the celery task
-- In celery_app.demo.py write a loop that will iterate 2500 times.  Inside the loop, use the two helper functions get_random_x and get_random_y to get suitable x and y values, add these values to the queue.  You will need to use the special celery delay function.
-- Rebuild the docker containers after you have made your changes, then run demo.py within the docker container using docker exec
-- You should now see you tasks being added to the queue in flower, and hopefully being successfully processed.  You can optionally confirm that things are working by looking in qgis or pgadmin to see the items being added to the database table
+1. Checkout branch `challenge-1`:
+```bash
+git checkout challenge-1
+```
 
-Troubleshooting:
+2. Look in *celery_app/demo.py* for the TODO comment relating to challenge 1
 
-- Use docker logs docker logs celeryworkshopgeopython2018_celery_1 to view console and view python errors
-- Use Flower to view failed task details.  You may be able to debug from the python output there
-- If you are reall stuck, the solution is on the master branch
+3. Look in *celery_app/app/tasks.py* to identify the function names and expected parameters of the the celery task.
+
+4. In *celery_app/demo.py* write a loop that will iterate 2500 times.  Inside the loop, use the two helper functions `get_random_x` and `get_random_y` to get suitable x and y values, add these values to the queue.  You will need to use the special celery `delay` function.
+
+5. Rebuild the docker containers after you have made your changes, then run `demo.py` within the docker container using docker exec.
+
+6. You should now see your tasks being added to the queue in Flower, and hopefully being successfully processed.  You can optionally confirm that things are working by looking in QGIS or PgAdmin to see the items being added to the database table.
 
 #### Challenge 2
 
@@ -208,13 +210,17 @@ The challenge is to get celery to retry processing a task in the event of a reco
 
 Hints:
 
-- checkout branch challenge-1
-- rebuild the docker containers, then run demo.py.  Observe that some tasks fail and none are retried
-- Check the celery docs for retrying.  http://docs.celeryproject.org/en/latest/userguide/tasks.html#retrying
-- Look in celery_app.app.service to see where a random artificial error is thrown.  Note the error type.
-- In the place where the celery task is executed (look for TODO - challenge 2), handle the above error using python exception handling, and trigger the celery retry mechanism.  See if you can also add a retry delay.
-- Rebuild the docker containers after you have made your changes, then run demo.py within the docker container using docker exec
-- If you have been successfull, you should see the retry counter in flower incrementing, and most likely no fails.  All tasks should pass after being retried.
+1. Checkout branch `challenge-2`.
+
+2. Rebuild the docker containers, then run `demo.py`.  Observe that some tasks fail and none are retried.
+
+3. Check the celery docs for [retrying failed tasks](http://docs.celeryproject.org/en/latest/userguide/tasks.html#retrying).
+
+4. Look in *celery_app/app/service.py* to see where a random artificial error is thrown.  Note the exception type.
+
+5. In the place where the celery task is executed (look for `TODO - challenge 2`), handle the above error using python exception handling, and trigger the Celery retry mechanism.  See if you can also add a retry delay.
+
+6. Rebuild the docker containers after you have made your changes, then run `demo.py` - If you have been successful, you should see the retry counter in flower incrementing, and most likely no fails.  All tasks should pass after being retried.
 
 #### Challenge 3
 
@@ -223,15 +229,3 @@ Hints:
 ```bash
 python -m pytest tests
 ```
-
-### Postgis database
-Port: 5432
-
-DB: geopython-db
-User: geopython
-schema: geopython
-
-tables: grid_squares - for holding results. style_cat field will hold the 3-letter codes below
-uk_boundary - UK dataset in BNG. Has several columns with names, but gu_a3 contains 3-letter code for each region: ENG, SCT, NIR, IMN, WLS
-
-Have included the docker scripts in the pull request for reference, but they shouldn't be needed for the workshop. Docker image download size ~ 174MB
