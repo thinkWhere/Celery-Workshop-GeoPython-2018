@@ -7,7 +7,7 @@ This application is a [docker-compose](https://docs.docker.com/compose/) orchest
 
 - [Celery](http://docs.celeryproject.org/en/latest/index.html) - Python Celery application to produce/consume messages (the worker)
 - [RabbitMQ](https://www.rabbitmq.com/#getstarted) - Message broker (the queue)
-- [Flower]((http://flower.readthedocs.io/en/latest/) - Web app to monitor tasks
+- [Flower](http://flower.readthedocs.io/en/latest/) - Web app to monitor tasks
 - [PostGIS](https://postgis.net/) - Spatial database to store task output
 
 ## Before you start...
