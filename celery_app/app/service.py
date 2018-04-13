@@ -15,7 +15,10 @@ def geoprocess(x, y):
     :param x: x value for task
     :param y: y value for task
     """
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     with get_db_cursor() as cur:
 
         # check for intersection
