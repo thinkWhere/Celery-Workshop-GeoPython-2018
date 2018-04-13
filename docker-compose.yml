@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=geopython
       - POSTGRES_DB=geopython-db
     ports:
-      - "5432:5432"
+      - "5435:5432"
 
   rabbitmq:
     # Message broker for Celery
