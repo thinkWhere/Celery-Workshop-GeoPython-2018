@@ -180,6 +180,7 @@ The database connection details are:
 - DB = geopython-db
 - Port = 5432
 - User = geopython
+- Password = geopython
 - Schema = geopython
 
 From this table and the code, try and work out what the task does.
