@@ -12,7 +12,7 @@ def create_connection_pool():
                                   dbname="geopython-db",
                                   user="geopython",
                                   host="***IP_ADDRESS_HERE***",
-                                  port="5432",
+                                  port="5435",
                                   password="geopython")
     return pool
 
