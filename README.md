@@ -231,7 +231,7 @@ In this exercise, if the technology allows us, you will connect your celery work
 
 2. Edit *celery_app/app/tasks.py* line #7 to replace `***IP_ADDRESS_HERE***` with the IP address given to you in the workshop.  This allows the celery worker to connect to the central queue.
 
-3. Edit *celery_app/app/service.py* line #17 to replace `***IP_ADDRESS_HERE***` with the IP address given to you in the workshop. This is for connection to write results to a central database.
+3. Edit *celery_app/app/db.py* line #14 to replace `***IP_ADDRESS_HERE***` with the IP address given to you in the workshop. This is for connection to write results to a central database.
 
 4. Rebuild the Docker containers
 
