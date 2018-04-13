@@ -20,7 +20,7 @@ def geoprocess(x, y):
             # check for intersection
             query = f"""SELECT gu_a3
                  from uk_boundary
-                 WHERE ST_Intersects(geom, ST_GeometryFromText('SRID=27700;POINT({x} {y})'));
+                 WHERE ST_Intersects(geom, ST_GeomFromEWKT('SRID=27700;POINT({x} {y})'));
                  """
             cur.execute(query)
 
