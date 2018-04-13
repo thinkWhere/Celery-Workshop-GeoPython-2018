@@ -1,6 +1,8 @@
 import math
 import psycopg2
 
+from app.db import get_db_cursor
+
 
 class ServiceError(Exception):
     """Custom exception for service errors"""
@@ -13,35 +15,33 @@ def geoprocess(x, y):
     :param x: x value for task
     :param y: y value for task
     """
-    # TODO: connection pooling?
-    with psycopg2.connect(dbname="geopython-db", user="geopython", host="postgis", port="5432", password="geopython") as con:
-        with con.cursor() as cur:
+    with get_db_cursor() as cur:
 
-            # check for intersection
-            query = f"""SELECT gu_a3
-                 from uk_boundary
-                 WHERE ST_Intersects(geom, ST_GeometryFromText('SRID=27700;POINT({x} {y})'));
-                 """
-            cur.execute(query)
+        # check for intersection
+        query = f"""SELECT gu_a3
+             from uk_boundary
+             WHERE ST_Intersects(geom, ST_GeometryFromText('SRID=27700;POINT({x} {y})'));
+             """
+        cur.execute(query)
 
-            # determine style code to use
-            rows = cur.fetchall()
-            if rows:
-                style = rows[0][0]
-            else:
-                style = 'SEA'
+        # determine style code to use
+        rows = cur.fetchall()
+        if rows:
+            style = rows[0][0]
+        else:
+            style = 'SEA'
 
-            # get ref code
-            ref = get_ref(x, y)
+        # get ref code
+        ref = get_ref(x, y)
 
-            # make object for db and insert it. Insert exceptions will raise to task.
-            size = 1000
-            xmin = int(x / size) * size
-            xmax = xmin + size
-            ymin = int(y / size) * size
-            ymax = ymin + size
-            string_for_db = f"ST_GeometryFromText('POLYGON(({xmin} {ymin},{xmax} {ymin},{xmax} {ymax},{xmin} {ymax},{xmin} {ymin}))',27700)"
-            cur.execute(f"INSERT INTO grid_squares (grid_ref, style_cat, geom) VALUES('{ref}', '{style}', {string_for_db})")
+        # make object for db and insert it. Insert exceptions will raise to task.
+        size = 1000
+        xmin = int(x / size) * size
+        xmax = xmin + size
+        ymin = int(y / size) * size
+        ymax = ymin + size
+        string_for_db = f"ST_GeometryFromText('POLYGON(({xmin} {ymin},{xmax} {ymin},{xmax} {ymax},{xmin} {ymax},{xmin} {ymin}))',27700)"
+        cur.execute(f"INSERT INTO grid_squares (grid_ref, style_cat, geom) VALUES('{ref}', '{style}', {string_for_db})")
 
 
 def get_ref(e, n):
