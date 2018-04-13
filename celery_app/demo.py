@@ -21,7 +21,7 @@ def get_random_x():
 
 
 def get_random_y():
-    return random.randint(0, 130000)
+    return random.randint(0, 1300000)
 
 
 if __name__ == '__main__':
