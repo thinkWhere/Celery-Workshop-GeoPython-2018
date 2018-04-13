@@ -3,17 +3,11 @@ import random
 
 
 def call_do_task():
-    """Call the do_task task x times."""
-    iterations = 2500
+    """TODO - Challenge 1
 
-    for task_execution in range(iterations):
-
-        x = get_random_x()
-        y = get_random_y()
-
-        do_task.delay(x, y)
-
-        print(f"called do_task({x}, {y}) asynchronously")
+    write a loop that will iterate 2500 times. Inside the loop, use the two helper functions get_random_x and
+    get_random_y to get suitable x and y values, add these values to the queue.  You will need to use the special
+    celery delay function to do this."""
 
 
 def get_random_x():
