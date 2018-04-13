@@ -51,9 +51,12 @@ def do_task(self, x, y):
     Returns:
         None
     """
+    # TODO - Challenge 2
+    """
+    The app.service.geoprocess artificially throws an artificial error to simulate a recoverable error.  Catch this
+    error, and use celery's retry mechanism to retry processing the task.
+    """
     try:
         geoprocess(x, y)
-    except ServiceError as se:
-        self.retry(countdown=10, exc=se)
     except Exception as exc:
         raise TaskError(exc)
