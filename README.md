@@ -34,6 +34,14 @@ This application requires [Docker Community Edition and Docker Compose](https://
   docker-compose ps
   ```
 
+  You should see the following containers ids listed
+    ```docker
+    celeryworkshopgeopython2018_celery_1                                                                                
+    celeryworkshopgeopython2018_flower_1                                                         
+    celeryworkshopgeopython2018_postgis_1                                                                                   
+    celeryworkshopgeopython2018_rabbitmq_1   
+    ```
+  
   The state of each container should be "Up".
 
 4. You may wish to execute commands inside a container:
@@ -41,6 +49,10 @@ This application requires [Docker Community Edition and Docker Compose](https://
   ```docker
   docker exec -it <container id> /bin/sh -c "<command for container>"
   ```
+  For example:
+  ```docker
+  docker exec -it celeryworkshopgeopython2018_celery_1  /bin/sh -c "ls"
+  ```  
 
 5. Stop the containers by cancelling the process in terminal window.
 
