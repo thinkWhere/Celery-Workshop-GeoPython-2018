@@ -31,12 +31,11 @@ def get_db_connection():
 
 
 @contextmanager
-def get_db_cursor(commit=False):
+def get_db_cursor():
     with get_db_connection() as connection:
       cursor = connection.cursor()
       try:
           yield cursor
-          if commit:
-              connection.commit()
+          connection.commit()
       finally:
           cursor.close()
