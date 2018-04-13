@@ -197,7 +197,7 @@ The challenge is to get celery to retry processing a task in the event of a reco
 
 Hints:
 
-1. Checkout branch `challenge-2`.
+1. Checkout branch `challenge-2`. **make sure you commit any changes you wish to keep or discard changes before switching branch**
 
 2. Rebuild the docker containers, then run `demo.py`.  Observe that some tasks fail and none are retried.
 
