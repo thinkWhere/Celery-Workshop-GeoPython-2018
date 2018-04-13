@@ -16,8 +16,10 @@ def create_connection_pool():
                                   password="geopython")
     return pool
 
+
 @contextmanager
 def get_db_connection():
+    """Context manager for a database connection"""
     try:
         # Setup connection pool is it doesn't exist
         global pool
@@ -32,6 +34,7 @@ def get_db_connection():
 
 @contextmanager
 def get_db_cursor():
+    """Context manager for database cursor"""
     with get_db_connection() as connection:
       cursor = connection.cursor()
       try:
