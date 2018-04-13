@@ -162,28 +162,6 @@ def call_do_task():
         print(f"called do_task({x}, {y}) asynchronously")
 ...
 ```
-Run `demo.py` from within the celery container:
-
-```docker
-docker exec -it <container id> /bin/sh -c "python demo.py"
-```
-
-As you can see the `do_task` function has been called 2500 times with random x and y values.
-
-Check the process of the running/queued tasks in the [Flower web app](#monitoring-tasks-with-flower).
-
-#### Viewing the results
-
-If you have desktop GIS package (such as QGIS), you will be able to connect to PostGIS and add the `grid_squares` table as a vector layer.
-
-The database connection details are:
-- DB = geopython-db
-- Port = 5432
-- User = geopython
-- Password = geopython
-- Schema = geopython
-
-From this table and the code, try and work out what the task does.
 
 ### Challenge 1
 
@@ -196,15 +174,22 @@ Hints:
 git checkout challenge-1
 ```
 
-2. Look in *celery_app/demo.py* for the TODO comment relating to challenge 1
+2. Look in *celery_app/demo.py* for the TODO comment relating to challenge 1.
 
 3. Look in *celery_app/app/tasks.py* to identify the function names and expected parameters of the the celery task.
 
 4. In *celery_app/demo.py* write a loop that will iterate 2500 times.  Inside the loop, use the two helper functions `get_random_x` and `get_random_y` to get suitable x and y values, add these values to the queue.  You will need to use the special celery `delay` function.
 
-5. Rebuild the docker containers after you have made your changes, then run `demo.py` within the docker container using docker exec.
+5. Rebuild the docker containers after you have made your changes, [then run `demo.py`](#build-and-run-the-containers) within the docker container using docker exec. Check the process of the running/queued tasks in the [Flower web app](#monitoring-tasks-with-flower).
 
-6. You should now see your tasks being added to the queue in Flower, and hopefully being successfully processed.  You can optionally confirm that things are working by looking in QGIS or PgAdmin to see the items being added to the database table.
+6. If you have pgadmin or similar, you can connect to the database and see records being added to the grid_squares table.  If you have desktop GIS package (such as QGIS), you will be able to add the table as a vector layer to visualise the data.
+
+The database connection details are:
+- DB = geopython-db
+- Port = 5432
+- User = geopython
+- Password = geopython
+- Schema = geopython
 
 ### Challenge 2
 
