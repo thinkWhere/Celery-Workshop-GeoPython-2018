@@ -1,7 +1,6 @@
 from contextlib import contextmanager
 
 from psycopg2.pool import ThreadedConnectionPool
-from psycopg2.extras import RealDictCursor
 
 
 pool = None
