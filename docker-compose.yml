@@ -46,3 +46,17 @@ services:
       - celery
     ports:
       - "5555:5555"
+
+  geoserver:
+    # GeoServer instance to provide demo map service
+    image: thinkwhere/geoserver:2.12
+    volumes:
+      - ~/geoserver_data:/opt/geoserver/data_dir
+    environment:
+      - GEOSERVER_LOG_LOCATION=/opt/geoserver/data_dir/logs/geoserver_8085.log
+    links:
+      - postgis
+    depends_on:
+      - postgis
+    ports:
+      - "8087:8080"
