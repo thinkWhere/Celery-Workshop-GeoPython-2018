@@ -27,6 +27,12 @@ upload grid_squares.sld
 
 Apply style to grid_squares layer
 
+For web served by python http server:
+cd C:\dev\Celery-Workshop-GeoPython-2018\web-map
+python -m http.server
+http://localhost:8000/web-map.html
+
+
 
 
 
