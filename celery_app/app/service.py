@@ -1,5 +1,6 @@
 import math
 import psycopg2
+import random
 
 from app.db import get_db_cursor
 
@@ -15,6 +16,11 @@ def geoprocess(x, y):
     :param x: x value for task
     :param y: y value for task
     """
+    # throw a random error to demonstrate celery retry handling
+    i = random.randint(1, 10)
+    if i == 6:
+       raise ServiceError("6 is my unlucky number")
+
     with get_db_cursor() as cur:
 
         # check for intersection
