@@ -16,7 +16,7 @@ def geoprocess(x, y):
     :param x: x value for task
     :param y: y value for task
     """
-    # throw a random error to demonstrate rety handling
+    # throw a random error to demonstrate celery retry handling
     i = random.randint(1, 10)
     if i == 6:
        raise ServiceError("6 is my unlucky number")
