@@ -35,12 +35,12 @@ This application requires [Docker Community Edition and Docker Compose](https://
   ```
 
   You should see the following containers ids listed
-    ```docker
-    celeryworkshopgeopython2018_celery_1                                                                                
-    celeryworkshopgeopython2018_flower_1                                                         
-    celeryworkshopgeopython2018_postgis_1                                                                                   
-    celeryworkshopgeopython2018_rabbitmq_1   
-    ```
+  ```docker
+  celeryworkshopgeopython2018_celery_1
+  celeryworkshopgeopython2018_flower_1
+  celeryworkshopgeopython2018_postgis_1
+  celeryworkshopgeopython2018_rabbitmq_1
+  ```
   
   The state of each container should be "Up".
 
